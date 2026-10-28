@@ -63,6 +63,7 @@
     if (!deck || typeof deck !== "object") throw new Error("deck.json is not a valid project file.");
     if (!Array.isArray(deck.cards)) deck.cards = deck.initialCard ? [deck.initialCard] : [];
     state.dir = dir; state.deck = deck; state.selectedId = deck.initialCard?.cardId || deck.cards[0]?.cardId || null;
+    $("save-card").disabled = false; $("remove-card").disabled = false;
     $("workspace").classList.remove("hidden");
     $("project-name").textContent = deck.title || dir.name;
     $("project-status").textContent = dir.name;
