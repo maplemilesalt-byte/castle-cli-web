@@ -211,12 +211,8 @@
       toast("The preview URL must use HTTP or HTTPS.");
       return;
     }
-    const opened = window.open(previewUrl.href, "_blank", "noopener,noreferrer");
-    if (opened) {
-      toast("Opening Castle serve preview in a new tab.");
-    } else {
-      toast("The browser blocked the new tab. Allow pop-ups and try again.");
-    }
+    window.open(previewUrl.href, "_blank", "noopener,noreferrer");
+    toast("Trying to open the Castle serve preview. If no tab appears, allow pop-ups and try again.");
   });
   $("serve-url").addEventListener("keydown", (event) => {
     if (event.key === "Enter") $("open-preview").click();
