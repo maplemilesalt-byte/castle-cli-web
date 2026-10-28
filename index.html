@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10151f">
+  <title>Castle CLI Web</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Castle CLI Web home"><span class="brand-mark">C</span><span>castle<span class="muted">/web</span></span></a>
+    <span class="top-status"><span class="status-dot"></span><span id="project-status">No project open</span></span>
+  </header>
+  <main class="shell">
+    <section class="intro">
+      <p class="eyebrow">BROWSER-BASED PROJECT TOOLKIT</p>
+      <h1>Your Castle projects,<br><span>without the terminal.</span></h1>
+      <p class="lede">Create a project, manage cards, and edit Lua scripts directly in your browser. Files stay on your device when using folder access.</p>
+      <div class="actions">
+        <button id="open-folder" class="button primary">Open project folder</button>
+        <button id="new-project" class="button secondary">Create new project</button>
+        <label class="button secondary file-label">Import deck.json<input id="import-deck" type="file" accept=".json,application/json" hidden></label>
+      </div>
+      <p class="hint">Folder access works in browsers that support the File System Access API (usually Chrome/Edge over HTTPS or localhost).</p>
+    </section>
+
+    <section id="workspace" class="workspace hidden" aria-live="polite">
+      <aside class="sidebar">
+        <div class="side-heading"><span>PROJECT</span><button id="refresh-project" class="icon-button" title="Refresh project" aria-label="Refresh project">↻</button></div>
+        <div id="project-name" class="project-name">Untitled</div>
+        <div class="side-heading cards-heading"><span>CARDS</span><button id="add-card" class="icon-button" title="Add card" aria-label="Add card">+</button></div>
+        <nav id="card-list" class="card-list"></nav>
+        <div class="side-bottom">
+          <button id="download-project" class="button secondary full">Download deck.json</button>
+          <button id="close-project" class="text-button">Close project</button>
+        </div>
+      </aside>
+      <section class="editor-panel">
+        <div class="editor-top">
+          <div><p class="eyebrow">PROJECT EDITOR</p><h2 id="editor-title">Choose a card</h2></div>
+          <span id="save-state" class="save-state">No changes</span>
+        </div>
+        <div id="empty-state" class="empty-state">
+          <div class="empty-icon">⌘</div><h3>Pick a card to get started</h3><p>Your card's main Lua script will appear here. Choose a card in the sidebar or create one.</p>
+        </div>
+        <div id="card-editor" class="hidden">
+          <div class="field-row">
+            <label class="field">Card title<input id="card-title" type="text" maxlength="120" placeholder="My card"></label>
+            <label class="field">Card ID<input id="card-id" type="text" readonly></label>
+          </div>
+          <div class="code-heading"><label for="lua-editor">scripts/main.lua</label><span>Lua</span></div>
+          <textarea id="lua-editor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Lua script editor"></textarea>
+          <div class="editor-actions">
+            <button id="save-card" class="button primary">Save changes</button>
+            <button id="download-script" class="button secondary">Download Lua</button>
+            <button id="remove-card" class="button danger">Remove card</button>
+          </div>
+          <p class="hint">This editor writes the script and card metadata to the selected project folder. It does not run the Castle engine.</p>
+        </div>
+      </section>
+    </section>
+    <section class="feature-grid">
+      <article class="feature"><span class="feature-number">01</span><h3>Local-first</h3><p>Open a project folder and work with its files directly. No upload is required for local editing.</p></article>
+      <article class="feature"><span class="feature-number">02</span><h3>Cards & scripts</h3><p>Add cards, edit titles, and work on Lua scripts from one lightweight interface.</p></article>
+      <article class="feature"><span class="feature-number">03</span><h3>Plain HTML + JS</h3><p>No Node.js runtime or build step. Host the files on GitHub Pages or any static web host.</p></article>
+    </section>
+    <div id="toast" class="toast" role="status"></div>
+    <footer><span>Castle CLI Web · community browser port</span><a href="https://github.com/castle-xyz/castle-cli" target="_blank" rel="noreferrer">Original Castle CLI ↗</a></footer>
+  </main>
+  <dialog id="create-dialog">
+    <form id="create-form" method="dialog">
+      <p class="eyebrow">NEW PROJECT</p><h2>Create a Castle deck</h2>
+      <label class="field">Project title<input id="new-title" required maxlength="120" value="My Castle Deck" placeholder="My Castle Deck"></label>
+      <p class="hint">Choose a folder in the next step. The app will create deck.json, a starter card, and a main.lua script.</p>
+      <div class="dialog-actions"><button type="button" id="cancel-create" class="button secondary">Cancel</button><button class="button primary" type="submit">Choose folder & create</button></div>
+    </form>
+  </dialog>
+  <script src="./app.js" defer></script>
+</body>
+</html>
