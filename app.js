@@ -198,7 +198,31 @@
     } catch (e) { if (e.name !== "AbortError") toast(e.message || String(e)); }
   });
   $("new-project").addEventListener("click", () => {
-    if (!supportsFolderAccess) { toast("Folder access needs a recent Chromium browser over HTTPS or localhost."); return; }
+    $("open-preview").addEventListener("click", () => {
+    const raw = $("serve-url").value.trim();
+    let previewUrl;
+    try {
+      previewUrl = new URL(raw);
+    } catch {
+      toast("Enter the full URL printed by castle serve, including http:// or https://.");
+      return;
+    }
+    if (!["http:", "https:"].includes(previewUrl.protocol)) {
+      toast("The preview URL must use HTTP or HTTPS.");
+      return;
+    }
+    const opened = window.open(previewUrl.href, "_blank", "noopener,noreferrer");
+    if (opened) {
+      toast("Opening Castle serve preview in a new tab.");
+    } else {
+      toast("The browser blocked the new tab. Allow pop-ups and try again.");
+    }
+  });
+  $("serve-url").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") $("open-preview").click();
+  });
+
+  if (!supportsFolderAccess) { toast("Folder access needs a recent Chromium browser over HTTPS or localhost."); return; }
     $("create-dialog").showModal(); $("new-title").focus();
   });
   $("cancel-create").addEventListener("click", () => $("create-dialog").close());
