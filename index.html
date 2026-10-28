@@ -37,6 +37,17 @@
         </div>
       </aside>
       <section class="editor-panel">
+        <div class="preview-connect">
+          <div class="preview-copy">
+            <p class="eyebrow">LIVE ENGINE PREVIEW</p>
+            <strong>Connect to Castle serve</strong>
+            <p>Run <code>castle serve my-deck --open</code> in the terminal, then paste the URL it prints.</p>
+          </div>
+          <div class="preview-controls">
+            <label class="field" for="serve-url">Preview URL<input id="serve-url" type="url" value="http://localhost:3000" placeholder="http://localhost:PORT" spellcheck="false"></label>
+            <button id="open-preview" class="button primary" type="button">Open preview ↗</button>
+          </div>
+        </div>
         <div class="editor-top">
           <div><p class="eyebrow">PROJECT EDITOR</p><h2 id="editor-title">Choose a card</h2></div>
           <span id="save-state" class="save-state">No changes</span>
