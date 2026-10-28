@@ -13,10 +13,11 @@ Open `index.html` through a static web server, or deploy this repository with Gi
 - Add and remove cards.
 - Download the current `deck.json` or an individual Lua script.
 - Import a `deck.json` for metadata inspection.
+- Open an already-running `castle serve` preview in a separate browser tab by pasting its printed URL.
 
 ## Important differences from the Node CLI
 
-This is not a one-to-one replacement for the original CLI. A web page cannot run Node.js APIs, spawn the local Castle player server, watch files in the background, or access arbitrary local files without browser permission. The original `serve`, live engine preview, screenshot/log IPC, full scene editing/materialization, Castle login, and remote `get-deck`/`save-deck` flows are not implemented here yet.
+This is not a one-to-one replacement for the original CLI. A web page cannot run Node.js APIs, spawn the local Castle player server, watch files in the background, or access arbitrary local files without browser permission. The web app can open the URL from an already-running `castle serve` process in a separate tab, but it does not start the Node.js server itself. The live engine preview still depends on the original CLI and its player/WASM bundle; screenshot/log IPC, full scene editing/materialization, Castle login, and remote `get-deck`/`save-deck` flows are not implemented here yet.
 
 The project creator writes a lightweight starter structure; it does not bundle Castle's player/WASM engine or the original CLI's generated blueprint assets. Use the original CLI when you need a fully initialized, engine-ready deck or live preview.
 
